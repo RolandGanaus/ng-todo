@@ -13,7 +13,7 @@ Filter:&nbsp;
   <mat-select [(ngModel)]="todoFilter.assignedTo" (selectionChange)="refreshFilter()" placeholder="Verantwortlicher">
     <mat-option *ngFor="let p of people" [value]="p.name">{{ p.name }}</mat-option>
   </mat-select>
-</mat-form-field>
+</mat-form-field>&nbsp;
 <button mat-button (click)="deleteFilter()"><fa-icon icon="trash-alt"></fa-icon></button>
 
 <mat-list *ngIf="todos">
@@ -21,7 +21,7 @@ Filter:&nbsp;
     <mat-checkbox [(ngModel)]="t.done" (change)="saveTodo(t)"></mat-checkbox>&nbsp;
     <b>{{ t.description }}</b>&nbsp;{{ t.assignedTo }}
     <button mat-button (click)="editTodo(t)">Bearbeiten</button>
-    <button mat-button (click)="deleteTodo(t)">X</button>
+    <button mat-button (click)="deleteTodo(t)"><fa-icon icon="trash-alt"></fa-icon></button>
   </mat-list-item>
 </mat-list>
 
