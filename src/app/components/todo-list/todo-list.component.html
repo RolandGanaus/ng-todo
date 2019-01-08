@@ -1,0 +1,36 @@
+<h1>Meine ToDos</h1>
+
+<app-progress-bar *ngIf="todos" [current]="doneCount" [max]="todos.length"></app-progress-bar>
+
+Filter:&nbsp;
+<mat-form-field>
+  <mat-select [(ngModel)]="todoFilter.done" (selectionChange)="refreshFilter()" placeholder="Status">
+    <mat-option [value]="false">Nicht erledigt</mat-option>
+    <mat-option [value]="true">Erledigt</mat-option>
+  </mat-select>
+</mat-form-field>&nbsp;
+<mat-form-field>
+  <mat-select [(ngModel)]="todoFilter.assignedTo" (selectionChange)="refreshFilter()" placeholder="Verantwortlicher">
+    <mat-option *ngFor="let p of people" [value]="p.name">{{ p.name }}</mat-option>
+  </mat-select>
+</mat-form-field>
+<button mat-button (click)="deleteFilter()"><fa-icon icon="trash-alt"></fa-icon></button>
+
+<mat-list *ngIf="todos">
+  <mat-list-item *ngFor="let t of todos | todoFilter:todoFilter">
+    <mat-checkbox [(ngModel)]="t.done" (change)="saveTodo(t)"></mat-checkbox>&nbsp;
+    <b>{{ t.description }}</b>&nbsp;{{ t.assignedTo }}
+    <button mat-button (click)="editTodo(t)">Bearbeiten</button>
+    <button mat-button (click)="deleteTodo(t)">X</button>
+  </mat-list-item>
+</mat-list>
+
+<mat-form-field>
+  <input name="description" matInput type="text" [(ngModel)]="newTodo.description" placeholder="Beschreibung">
+</mat-form-field>&nbsp;
+<mat-form-field>
+  <mat-select [(ngModel)]="newTodo.assignedTo" placeholder="Verantwortlicher">
+    <mat-option *ngFor="let p of people" [value]="p.name">{{ p.name }}</mat-option>
+  </mat-select>
+</mat-form-field>&nbsp;
+<button mat-button (click)="save()">Speichern</button>
