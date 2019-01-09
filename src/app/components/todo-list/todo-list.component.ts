@@ -27,7 +27,7 @@ export class TodoListComponent implements OnInit {
   }
 
   public refreshFilter() {
-    this.todoFilter = Object.assign({}, this.todoFilter);
+    this.todoFilter = {...this.todoFilter};
   }
 
   public deleteFilter() {
@@ -51,7 +51,7 @@ export class TodoListComponent implements OnInit {
   }
 
   public editTodo(todo: ITodo) {
-    this.newTodo = Object.assign({}, todo);
+    this.newTodo = {...todo};
   }
 
   public deleteTodo(todo: ITodo) {
